@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <script>
+
+        // SELECT rock paper or scissors at random
+        function getComputerChoice() {
+
+            // SET an array with 3 values: Rock, Paper, Scissors
+            // CALCULATE random interger from 0-2
+            // RETURN random value of Rock, Paper, Scissors using random int as index
+            
+            const choices = ['Rock', 'Paper', 'Scissors'];
+            index = Math.floor(Math.random() * 3);
+            return(choices[index]);
+        }
+
+        function capatalize(string) {
+            let newString = string[0].toUpperCase() + string.substr(1).toLowerCase();
+            return(newString);
+        }
+
+        function playRound(playerSelection, computerSelection) {
+
+            // CONVERT playerSelection value to all lowercase
+            // COMPARE the playerSelection value and computerSelection value
+            // DETERMINE who is the winner
+            // IF player wins THEN output win message
+            // ELSE output loss message
+            
+            let message;
+            if (
+                (capatalize(playerSelection) == 'Rock' && computerSelection == 'Scissors') ||
+                (capatalize(playerSelection) == 'Paper' && computerSelection == 'Rock') ||
+                (capatalize(playerSelection) == 'Scissors' && computerSelection == 'Paper')          
+                ){
+                    message = 'You win! ' + capatalize(playerSelection) + ' beats ' + computerSelection;
+                    
+                } else if(
+                (capatalize(playerSelection) == 'Rock' && computerSelection == 'Paper') ||
+                (capatalize(playerSelection) == 'Paper' && computerSelection == 'Scissors') ||
+                (capatalize(playerSelection) == 'Scissors' && computerSelection == 'Rock')  
+                ) {
+                    message = 'You lose! ' + computerSelection + ' beats ' + capatalize(playerSelection);
+                }
+                else if (capatalize(playerSelection) == computerSelection) {
+                    message = 'It\'s a tie! You both selected ' + computerSelection;
+                } else {
+                    message = 'Invalid entry';
+                }
+                
+            return(message);
+
+        }
+
+        function game() {
+            //FOR 5 rounds 
+                //Prompt user for input of rock, paper, or scissors
+                    //IF input is invalid, prompt again
+                // Compare user input to random computer selection using playRound()
+                // Display a message showing who won
+
+            let playerScore = 0;
+            let computerScore = 0;
+
+            for (let i = 0; i < 5; i++) {
+                
+                let playerSelection;
+
+                while(true) {
+                    playerSelection = prompt('Enter Rock, Paper, or Scissors: ');
+                    if (capatalize(playerSelection) == 'Rock' || capatalize(playerSelection) == 'Paper' || capatalize(playerSelection) == 'Scissors') {
+                        break;
+                    }
+                    alert('Invalid entry');
+                }
+
+                console.log(playRound(playerSelection, getComputerChoice()));
+            }
+        }
+
+        
+        game()
+    </script>
+
+</html>
